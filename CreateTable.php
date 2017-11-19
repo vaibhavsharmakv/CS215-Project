@@ -21,6 +21,7 @@ messageId INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 userEmail VARCHAR(50) NOT NULL ,
 messageDate VARCHAR(12) NOT NULL,
 message VARCHAR(500) NOT NULL,
+passcode VARCHAR(12) NOT NULL,
 FOREIGN KEY (userEmail) REFERENCES user(userEmail)
 )";
 

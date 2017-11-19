@@ -2,14 +2,16 @@
 
 //validate input from email and password
 $msg='';
+$msg2=''; 
+$page='signUpPage.php';
+$page2='ReplyPage.html';
 
 if (filter_has_var(INPUT_POST,'submit'))
 {
 $email= trim($_POST["email"]);
 $password=trim($_POST["pswd"]);
 
-echo $email;
-echo $password;
+
 
 //clear
 	if(!empty($email) && !empty($password) )
@@ -26,7 +28,7 @@ echo $password;
 		$q = "SELECT userEmail FROM user WHERE userEmail='$email' AND password = '$password';";
 		$result = mysqli_query($conn, $q);		
 		$row = mysqli_fetch_assoc($result);
-		var_dump($result);
+		
 		if (mysqli_num_rows($result)!=0) 
 		{		
 			
@@ -35,7 +37,7 @@ echo $password;
 	  		session_start();
 			$_SESSION["userEmail"] = $row["userEmail"];
 			
-			header("Location:".signUpPage.php );
+			header("Location:".$page );
 			$conn->close();
 			exit();
 		}
@@ -54,8 +56,54 @@ echo $password;
 	$msg='Email or password cannot be empty';
 	}
 
+}
+
+if (filter_has_var(INPUT_POST,'submit2'))
+{
+$secretcode=trim($_POST["secretCode"]);
+
+	if(!empty($secretcode))
+	{
+		$conn = new mysqli("localhost", "sharma3v", "Palak058", "sharma3v");
+		if ($conn->connect_error)
+		{
+			 // conection fail
+			die ("Connection failed: " . $conn->connect_error);
+	 	}
+		$q = "SELECT messageId FROM Message WHERE passcode='$secretcode';";
+		$result = mysqli_query($conn, $q);		
+		$row = mysqli_fetch_assoc($result);
+		var_dump($result);
+		if (mysqli_num_rows($result)!=0) 
+		{		
+			
+			
+	  		// login successful
+	  		session_start();
+			$_SESSION["messageId"] = $row["messageID"];
+			
+			header("Location:".$page2 );
+			$conn->close();
+			exit();
+		}
+		else
+		{
+		$msg2='No message assosiated with this passcode';
+		}
+		
+	
+	}
+	else
+	{
+	$msg2='No passcode entered';
+	}
+
+
 
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -95,21 +143,26 @@ echo $password;
   <button id="b2" class="button" type="submit" name ="submit">Login</button>
     	<a href="signUpPage.php"><button class="button" type="submit">Sign up</button></a>
        
- </form>   
-
-
+  
+</form>
+ <form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">    
  	 <div class="container" style="background-color:#f1f1f1">
       
    
    </div>
     <table>
+    <?php if($msg2 != ''):?>
+    <tr><td ></td><td><span class = "err" ><?php echo $msg2 ?></span></td></tr>
+    <?php endif; ?>
     <tr><td ></td><td><label = id = "secretCode_err" class= "err" ></label></td></tr>
     <tr><td>Private Code: </td><td> <input  id = "secretCode" type="text" name="secretCode" size="30" /></td></tr>
 
 
  	  </table>
     
- 	 	<button id = "btn" class="button" type="submit">See Message</button>
+ 	 	<button id = "btn" class="button" type="submit" name="submit2" >See Message</button>
+
+ </form> 
  <!--	<script type="text/javascript" src="login.js"></script> -->
 </body>
 </html>﻿
