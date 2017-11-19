@@ -40,6 +40,7 @@ if (mysqli_query($conn, $sql)) {
     echo "\nTable user created successfully.\n";
 } 
 if (mysqli_query($conn, $sql2)) {
+    echo "\nTable message created successfully.\n";
 } 
 if (mysqli_query($conn, $sql3)) {
     echo "\nTable reply created successfully.\n";
