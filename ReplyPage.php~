@@ -1,0 +1,106 @@
+<?php
+session_start();
+
+$messageId=$_SESSION['messageId'];
+
+
+
+$conn = new mysqli("localhost", "sharma3v", "Palak058", "sharma3v");
+				if ($conn->connect_error)
+				{
+					 // conection fail
+					die ("Connection failed: " . $conn->connect_error);
+			 	}
+
+	
+			$sql = "Select message,messageDate,imagePath From Message  WHERE messageId=('$messageId')";
+	
+			$result = mysqli_query($conn, $sql);
+			$row = mysqli_fetch_assoc($result);
+						    	
+			$message=$row["message"];
+			$messageDate=$row["messageDate"];
+			$imagePath=$row["imagePath"];
+			echo $imagePath;
+			mysqli_close($conn); 
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secret Message</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <link rel="stylesheet" type="text/css" href="main.css">
+ <!--   <script type="text/javascript" src= "java.js"></script>
+-->
+
+ </head>
+ </html>
+ <body>
+              <ul class ="ul">
+  <li><a href="index.php">Home</a></li>
+  
+  
+</ul>
+<header>
+<table>
+<tr>
+<td>
+
+<td>
+<h1>Secret Message</h1></td>
+</tr>
+</table>
+</header>
+
+
+      <div class="chatbox">
+
+          
+              
+          <table class="chatlogs">
+	 <?php if($imagePath != ''):?>
+	  <tr><td > Image :<img src="<?=$imagePath?>" width="130" height="130"/> </td><td>
+	 <?php endif; ?>
+          <tr><td > Message: <?=$message?> </td><td>
+	  <tr><td > Time : <?=$messageDate?></td><td>
+          </table> 
+	
+	 <table class="chatlogs">
+	  <tr><td > Image :<img src="<?=$imagePath?>" width="130" height="130"/> </td><td>
+          <tr><td > Message: <?=$message?> </td><td>
+	  <tr><td > Time : <?=$messageDate?></td><td>
+          </table> 
+                   
+                   
+
+                   
+         
+                
+                
+
+          </div>
+               
+<br>
+<br>
+
+<form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data"> 
+       
+
+         
+          <table>
+          <tr><td ></td><td><label = id = "Message_err" class= "err" ></label></td></tr>
+          <tr><td >Reply: </td><td> <input  id="Message" type="text" class = "Message" name="Reply"  />
+          </table>
+          <p>
+          <button id="button" class="button" type="submit" name="send">Send</button>
+          <button id="del" class="button" type="submit" name="submit">Delete</button>
+          <tr><td ></td><td><label = id = "alert_err" class= "err" ></label></td></tr>
+          </p>
+</form > 
+<!-- script type="text/javascript" src="messageReply.js"></script>
+-->
+</body>
+</html>﻿

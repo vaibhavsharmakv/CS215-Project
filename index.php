@@ -4,7 +4,7 @@
 $msg='';
 $msg2=''; 
 $page='messagePostPage.php';
-$page2='ReplyPage.html';
+$page2='ReplyPage.php';
 
 if (filter_has_var(INPUT_POST,'submit'))
 {
@@ -73,14 +73,14 @@ $secretcode=trim($_POST["secretCode"]);
 		$q = "SELECT messageId FROM Message WHERE passcode='$secretcode';";
 		$result = mysqli_query($conn, $q);		
 		$row = mysqli_fetch_assoc($result);
-		var_dump($result);
+		
 		if (mysqli_num_rows($result)!=0) 
 		{		
 			
 			
 	  		// login successful
 	  		session_start();
-			$_SESSION["messageId"] = $row["messageID"];
+			$_SESSION["messageId"] = $row["messageId"];
 			
 			header("Location:".$page2 );
 			$conn->close();

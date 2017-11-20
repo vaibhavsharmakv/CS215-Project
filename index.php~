@@ -4,7 +4,7 @@
 $msg='';
 $msg2=''; 
 $page='messagePostPage.php';
-$page2='ReplyPage.html';
+$page2='ReplyPage.php';
 
 if (filter_has_var(INPUT_POST,'submit'))
 {
@@ -80,7 +80,7 @@ $secretcode=trim($_POST["secretCode"]);
 			
 	  		// login successful
 	  		session_start();
-			$_SESSION["messageId"] = $row["messageID"];
+			$_SESSION["messageId"] = $row["messageId"];
 			
 			header("Location:".$page2 );
 			$conn->close();

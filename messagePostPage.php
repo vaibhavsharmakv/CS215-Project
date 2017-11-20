@@ -2,7 +2,7 @@
 session_start();
 $userEmail=$_SESSION['userEmail'];
 
-$target_dir = "uploads/";
+$target_dir = "upload/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -19,50 +19,53 @@ if (filter_has_var(INPUT_POST,'submit'))
 
 	if(!empty($secretcode) && !empty($message))
 	{
-         	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
- 		if($check !== false)
-		 {
-		     $msg= "File is an image - " . $check["mime"] . ".";
-		        $uploadOk = 1;
-		  }
-		else
+		if(file_exists($_FILES["fileToUpload"]["tmp_name"]))
 		{
-        	$msg= "File is not an image.";
-        	$uploadOk = 0;
-    		}
-		if ($_FILES["fileToUpload"]["size"] > 500000) 
-		{
-    			$msg= "Sorry, your file is too large.";
-    			$uploadOk = 0;
-		}
-		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"&& $imageFileType != "gif" )
-		{
-       	    	  	$msg= "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-		        $uploadOk = 0;
-		}
-
-
-		if ($uploadOk == 0) 
-		{
-    			$msg="Sorry, your file was not uploaded.";
-			// if everything is ok, try to upload file
-		}
-		else
-		{
-			
-			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+		 	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+	 		if($check !== false)
+			 {
+			     $msg= "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			  }
+			else
 			{
-				
-				$msg= "Message Sent";
+			$msg= "File is not an image.";
+			$uploadOk = 0;
+	    		}
+			if ($_FILES["fileToUpload"]["size"] > 500000) 
+			{
+	    			$msg= "Sorry, your file is too large.";
+	    			$uploadOk = 0;
 			}
-			else 
+			if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"&& $imageFileType != "gif" )
 			{
-        		$msg= "Sorry, there was an error uploading your file.";
-    			}
+	       	    	  	$msg= "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				$uploadOk = 0;
+			}
+
+
+			if ($uploadOk == 0) 
+			{
+	    			$msg="Sorry, your file was not uploaded.";
+				// if everything is ok, try to upload file
+			}
+			else
+			{
+			
+				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+				{
+				
+					$msg= "Message Sent";
+				}
+				else 
+				{
+				$msg= "Sorry, there was an error uploading your file.";
+	    			}
+			}
+
 		}
 
-	
-
+		$msg="Message Sent";
 
 
 				$conn = new mysqli("localhost", "sharma3v", "Palak058", "sharma3v");
