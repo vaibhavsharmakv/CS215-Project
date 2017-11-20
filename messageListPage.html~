@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+ </head>
+ </html>
+ <body>
+             <ul class ="ul">
+
+  <li><a href="messagePostPage.php">Private Message</a></li>
+  <li><a href="index.php">Logout</a></li>
+  
+</ul>
+          
+        
+	    		  
+	  <div class="chatbox">
+
+		  <div class="chatlogs">
+		         <div class="chat friend">
+			      
+			<!--         <p class="chat-message">recived text</p>
+			         <p class="time"> 6:04 pm</p>
+			         <button class="btn"><i class="material-icons">delete</i></button>
+		  		 <button class="btn"><i class="material-icons" style="font-size:36px">call_missed</i></button>
+		         		
+		     	         <p class="chat-message">recived </p>
+		         	 <p class="time"> 6:11 pm</p>
+		                 <button class="btn"><i class="material-icons">delete</i></button>
+		                 <button class="btn"><i class="material-icons" style="font-size:36px">call_missed</i></button>
+			-->
+		   	</div>
+		        
+		        
+
+	 	</div>
+
+	
+	 	<!--<div class="chat-form">
+			<form id = "formid">
+	        		<textarea id="test" ></textarea>
+               			<input type = "submit"  name = "submit" />
+				 <button >Send</button>
+			</form>
+			
+	
+         	</div>-->
+	
+         
+<!--<script src="java.js"></script> -->
+
+</body>
+</html>﻿
