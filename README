@@ -1,0 +1,14 @@
+Name- Vaibhav Sharma
+Student ID - 200365101
+Url- http://www2.cs.uregina.ca/~sharma3v
+
+Websites
+1.Index.php - Homepage - allows user to log in and Sign up as well as see the secret message
+2.signUpPage.php - Registration Page - Allow user to Register on the Webiste 
+3.ReplyPage.php - Allow user to reply to see and reply to message after retriving it using his passcode
+4.messageListPage.php- Allows user to see all the messages he sent along with their reply's and let them delete it as well- also allow you to messagePostPage.php
+5.messagePostPage.php - Allow user to send a secret essage
+6.main.css - cascading style sheet for all the website 
+
+Special Note - all the Javascript Validation is disabled for assignment submission and we be enabled once assignment is submitted
+

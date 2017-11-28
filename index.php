@@ -3,7 +3,7 @@
 //validate input from email and password
 $msg='';
 $msg2=''; 
-$page='messagePostPage.php';
+$page='messageListPage.php';
 $page2='ReplyPage.php';
 
 if (filter_has_var(INPUT_POST,'submit'))
@@ -29,6 +29,8 @@ $password=trim($_POST["pswd"]);
 		$result = mysqli_query($conn, $q);		
 		$row = mysqli_fetch_assoc($result);
 		
+		
+		
 		if (mysqli_num_rows($result)!=0) 
 		{		
 			
@@ -36,6 +38,7 @@ $password=trim($_POST["pswd"]);
 	  		// login successful
 	  		session_start();
 			$_SESSION["userEmail"] = $row["userEmail"];
+			
 			
 			header("Location:".$page );
 			$conn->close();
@@ -59,7 +62,7 @@ $password=trim($_POST["pswd"]);
 }
 
 if (filter_has_var(INPUT_POST,'submit2'))
-{
+{header("Location:".$page2 );
 $secretcode=trim($_POST["secretCode"]);
 
 	if(!empty($secretcode))
@@ -71,8 +74,11 @@ $secretcode=trim($_POST["secretCode"]);
 			die ("Connection failed: " . $conn->connect_error);
 	 	}
 		$q = "SELECT messageId FROM Message WHERE passcode='$secretcode';";
+	
 		$result = mysqli_query($conn, $q);		
 		$row = mysqli_fetch_assoc($result);
+		
+	
 		
 		if (mysqli_num_rows($result)!=0) 
 		{		
@@ -81,7 +87,7 @@ $secretcode=trim($_POST["secretCode"]);
 	  		// login successful
 	  		session_start();
 			$_SESSION["messageId"] = $row["messageId"];
-			
+			$_SESSION["userEmail"] = $row["userEmail"];
 			header("Location:".$page2 );
 			$conn->close();
 			exit();
@@ -131,7 +137,7 @@ $secretcode=trim($_POST["secretCode"]);
     <tr><td ></td><td><span class = "err" ><?php echo $msg ?></span></td></tr>
     <?php endif; ?>
     <tr><td ></td><td><label = id = "email_err" class= "err" ></label></td></tr>
-    <tr><td>Email: </td><td> <input  id = "email" type="text" name="email" size="30" /></td></tr>
+    <tr><td>Email: </td><td> <input  id = "email" type="text" name="email" size="30" value="<?=$email?>"/></td></tr>
     	 
    
     <tr><td ></td><td><label = id = "password_err" class= "err" ></label></td></tr>
@@ -141,11 +147,14 @@ $secretcode=trim($_POST["secretCode"]);
     
   </table>
   <button id="b2" class="button" type="submit" name ="submit">Login</button>
-    	<a href="signUpPage.php"><button class="button" type="submit">Sign up</button></a>
+    	
        
   
 </form>
- <form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">    
+<br>
+<a href="signUpPage.php"><button id="bb" class="button" >Sign up</button></a>
+ <br>
+<form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">    
  	
     <table>
     <?php if($msg2 != ''):?>

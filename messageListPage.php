@@ -1,8 +1,42 @@
 <?php
-session_start();
 
-$userEmail=$_SESSION['userEmail'];
 
+
+
+	session_start();
+	if (!isset($_SESSION["userEmail"])) {
+		header("Location: index.php");
+		exit();
+	} else 
+	{
+	
+		$userEmail=$_SESSION['userEmail'];
+	
+		$conn = new mysqli("localhost", "sharma3v", "Palak058", "sharma3v");
+		if ($conn->connect_error)
+		{
+			 // conection fail
+			die ("Connection failed: " . $conn->connect_error);
+	 	}
+		else
+		{
+	
+			$sql = "Select messageId,message,messageDate,imagePath From Message WHERE userEmail=('$userEmail') ORDER BY messageId DESC;";
+
+			$result = $conn->query($sql);
+			
+			$sql1 = "Select messageId From Message WHERE userEmail=('$userEmail') ORDER BY messageId DESC;";
+			
+			$result1 = $conn->query($sql1);
+				
+			
+		}
+	
+		
+		
+	
+	}
+	
 
 ?>
 
@@ -26,21 +60,91 @@ $userEmail=$_SESSION['userEmail'];
           
         
 	    		  
-	  <div class="chatbox">
+	
 
-		  <div class="chatlogs"> 
+		  
+		<?while($row = mysqli_fetch_assoc($result)):?>
+			<div class="chatbox">
+
+			 <?php
+			$image= $row["imagePath"];
+			echo $row["imagePath"];
+			if( $image != 'upload/' ):?>
+			<div class="chatlogs"> 
+			
+			  <table class="chatlogs">
+			  <tr><td > Image :<img src="<?=$row['imagePath'] ?>" width="130" height="130"/> </td><td>
+			 <?php endif; ?>
+			<tr><td > Message: <?=$row["message"]?>  </td><td>
+				<br>
+			  <tr><td > Time : <?=$row["messageDate"]?></td><td>
+			  	<br>
 		
-	<?php
-	echo $userEmail;
-	?>
+			<?php
+			
+			$messageId=$row["messageId"];
 
+			$sql2 = "SELECT replyMessage,replyDate From Reply WHERE messageId=('$messageId') ORDER BY messageId DESC;";
+			$result2 = $conn->query($sql2);
+			while ($row2 = mysqli_fetch_assoc($result2)) 
+			{
 
+				?>
+				<tr><td > Reply: <?=$row2["replyMessage"]?>  </td><td>
+					<br>
+			  <tr><td >REPLY Time : <?=$row2["replyDate"]?></td><td>
+			  	<br>
+			  	<?php
+			  	
+			}
+			if (isset($_POST["delete"]) ){
+					$conn4 = new mysqli("localhost", "sharma3v", "Palak058", "sharma3v");
+					
+
+					if ($conn4->connect_error)
+					{
+						 // conection fail
+						die ("Connection failed: " . $conn2->connect_error);
+				 	}
+					$sql4 = "DELETE FROM Message WHERE messageId=('".$_POST["delete_id"]."');";
+					$sql5 = "DELETE FROM Reply WHERE messageId=('".$_POST["delete_id"]."');";
+					if ($conn4->query($sql4) === TRUE) {
+					    
+					}
+					if ($conn4->query($sql5) === TRUE) {
+					    
+					}
+					mysqli_close($conn4); 
+
+				}
+
+			?>
+			
+			<form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="post"> 
+			 <table >
+			<input type = "hidden" name = "delete_id" value ="<?=$messageId?>" >
+			<tr><td > <button id="del" class="button" method="POST" type="submit" name="delete">Delete</button></td><td>
+			
+			
+			</table>
+			</form>
+		
+		
+	
+	
+		  </table>
+	
 		</div>
-
+		 </div>
+<?php endwhile; ?>
   
-	  </div>	     
+	 
+ 
 			      
-		
+		<?php 
+		mysqli_close($conn);
+		mysqli_close($conn1);  			
+		?>
 	
          
 <!--<script src="java.js"></script> -->

@@ -9,6 +9,7 @@ if (!$conn) {
 
 // sql to create table
 $sql = "CREATE TABLE user (
+userId INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 userEmail VARCHAR(50) NOT NULL PRIMARY KEY,
 DOB VARCHAR(12),
 password VARCHAR(20) NOT NULL,
@@ -21,6 +22,8 @@ messageId INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 userEmail VARCHAR(50) NOT NULL ,
 messageDate VARCHAR(12) NOT NULL,
 message VARCHAR(500) NOT NULL,
+passcode VARCHAR(12) NOT NULL,
+imagePath varchar(256) Null,
 FOREIGN KEY (userEmail) REFERENCES user(userEmail)
 )";
 

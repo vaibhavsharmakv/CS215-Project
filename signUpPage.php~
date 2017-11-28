@@ -1,7 +1,7 @@
 <?php
 $msg = '';
 $msgclass= '';
-
+$page1='index.php';
 	$firstName = trim($_POST["Fname"]);
 	$lastName = trim($_POST["lname"]);
 	$DOB = trim($_POST["Dob"]);
@@ -54,11 +54,7 @@ if (filter_has_var(INPUT_POST,'submit'))
 				    	
 		
 					    	// login successful and display username
-					    	echo "<h1>" ."Welcome ". $un."!". "</h1>";
-					    	echo  "<h2>"."Your account has been created successfully."."</h2>";
-						?>
-						<a href="Login.html">Back to Login Page</a><br>
-						<a href="SignUp.html">Back to Sign Page</a>
+					    	header("Location:".$page1 );
 	
 						<?php
 
@@ -101,6 +97,12 @@ if(flag)
 </head>
 
 <body>
+<ul class ="ul">
+	
+  <li><a href="index.php">Home</a></li>
+  
+  
+</ul>
 <h1>Sign Up Page</h1>
 <form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">    
 

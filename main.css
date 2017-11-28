@@ -50,9 +50,13 @@ text-shadow:none;
 }
 
 #btn{
-    margin-left: 95px;
+    margin-left: 75px;
 }
 
+#bb{
+margin-left: 75px;
+margin-bottom:20px; 
+}
 
 
 /* Add padding to containers */
