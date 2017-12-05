@@ -7,11 +7,6 @@ if (ref=="ON")
 	clearInterval(myVar);
 	document.getElementById("refresh").innerHTML = "Automatic Refresh :OFF";
 	}
-else{
-	document.getElementById("refresh").value= "ON";
-	var myVar = setInterval(function(){ download() }, 5000);
-	document.getElementById("refresh").innerHTML = "Automatic Refresh :ON";
-	}
 
 }
 

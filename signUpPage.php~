@@ -1,4 +1,6 @@
 <?php
+
+
 $msg = '';
 $msgclass= '';
 $page1='index.php';
@@ -56,7 +58,7 @@ if (filter_has_var(INPUT_POST,'submit'))
 					    	// login successful and display username
 					    	header("Location:".$page1 );
 	
-						<?php
+						
 
 
 				  	} // end if 
@@ -83,7 +85,7 @@ if (filter_has_var(INPUT_POST,'submit'))
 	}
 	
 }
-if(flag)
+
 
 
 
@@ -93,7 +95,8 @@ if(flag)
 <title>SignUp Page</title> 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 <link rel="stylesheet" type="text/css" href="main.css">
-<!-- <script type="text/javascript" src= "java.js"></script>-->
+<script type="text/javascript" src= "java.js"></script>
+
 </head>
 
 <body>
@@ -104,7 +107,7 @@ if(flag)
   
 </ul>
 <h1>Sign Up Page</h1>
-<form  action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">    
+<form  id="myFrom" action= "<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">    
 
 
 	<table>
@@ -135,9 +138,16 @@ if(flag)
 		<button id="button" class="button" type="submit" name="submit">Submit</button>
 
 		<button  class="button" type="submit">Reset</button>	
+		<button  id = "test" class ="button" type="submit">TEST</button>
 	</p>
 </form>
 
-<!--<script type="text/javascript" src="signUp.js"></script>-->
+<script type="text/javascript" src="signUp.js"></script>
+
+
+
+
+
+
 </body>
 </html>

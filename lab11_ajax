@@ -24,10 +24,9 @@ function showUser(str) {
 <body>
 
 <form>
-<form>
-First name: <input type="text" onkeyup="showUser(this.value)">
-</form>
-<p>Suggestions: <span id="txtHint"></span></p>
+
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
 
 </body>
 </html> 

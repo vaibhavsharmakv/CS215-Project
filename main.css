@@ -5,7 +5,10 @@
     size: 20px;
     
 }
-
+p.user {
+	border: 1px solid black;
+	background: #CCCCCC;
+}
 
 h1{
 font-family: "Lobster", serif;

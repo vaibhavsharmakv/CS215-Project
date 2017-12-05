@@ -5,4 +5,3 @@ SignUpValidation.addEventListener("click", functionSet1,false);
 
 
 document.getElementById("test").addEventListener("click",test,false);
-

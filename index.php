@@ -170,5 +170,7 @@ $secretcode=trim($_POST["secretCode"]);
 
  </form> 
  <!--	<script type="text/javascript" src="login.js"></script> -->
+<br>
+<a href="index.html"><button id="bb" class="button" >Lab11</button></a>	
 </body>
 </html>﻿

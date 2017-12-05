@@ -137,7 +137,7 @@ $secretcode=trim($_POST["secretCode"]);
     <tr><td ></td><td><span class = "err" ><?php echo $msg ?></span></td></tr>
     <?php endif; ?>
     <tr><td ></td><td><label = id = "email_err" class= "err" ></label></td></tr>
-    <tr><td>Email: </td><td> <input  id = "email" type="text" name="email" size="30" value="<?=$userEmail?>"/></td></tr>
+    <tr><td>Email: </td><td> <input  id = "email" type="text" name="email" size="30" value="<?=$email?>"/></td></tr>
     	 
    
     <tr><td ></td><td><label = id = "password_err" class= "err" ></label></td></tr>
@@ -170,5 +170,7 @@ $secretcode=trim($_POST["secretCode"]);
 
  </form> 
  <!--	<script type="text/javascript" src="login.js"></script> -->
+<br>
+<a href="index.html"><button id="bb" class="button" >Lab11</button></a>	
 </body>
 </html>﻿

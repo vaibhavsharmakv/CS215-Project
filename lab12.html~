@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Lab12 Ajax with JSON and JQuery
+    </title>
+<style>
+#message{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	color: red;
+}
+#result_table{
+	margin-top: 1%;
+	margin-bottom: 5%;
+}
+
+table {
+	width : 50%;
+	margin : 0 auto;
+	border-collapse : collapse;
+}
+
+table, th, td {
+	border : black solid 1px;
+	padding : 0.77%;
+}
+
+caption {
+	font-size : 2em;
+	margin-top: 10%;
+	margin-bottom: 5%;
+}
+
+th {
+	text-align : center;
+	background-color : #BBBBBB;
+}
+
+td {
+	text-align : left;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+setOptions();
+$(document).ready(function(){
+    $("#Add").click(function(){
+	var data1 = {
+		Add: $('input[name=Add]').val(),
+		email: $('input[name=email]').val(),
+		username: $('input[name=username]').val(),
+		DOB: $('input[name=DOB]').val()	
+	};
+	$.ajax({data:data1});
+    });
+    $("#Search").click(function(){
+	var data2 = {
+		Search: $('input[name=Search]').val(),
+		Searchname: $('input[name=Searchname]').val(),
+		radiobutton: $('input:radio[name=radiobutton]:checked').val()
+	};
+	$.ajax({data:data2});
+    });
+});
+
+
+function setOptions(){
+$.ajaxSetup({
+  url: 'search.php',
+  type: 'post',
+  dataType: 'json',
+  success: displayJsonData,
+  error: printerror
+});
+}
+
+function displayJsonData(myArr){
+    if(myArr==null || myArr.length<=0){
+    	$("#tbodyResult").empty();
+	return;
+    }
+
+ 
+    errmsg = myArr[0].errmsg;
+    $("#message").html(errmsg);
+
+    sql =myArr[0].sql;
+    $("#message").html(sql);
+    
+    var row="";
+    for(var i = 1; i < myArr.length; i++) {
+        row += '<tr><td>' + myArr[i].email + '</td>'; 
+        row += '<td>' + myArr[i].username + '</td>'; 
+        row += '<td>' + myArr[i].DOB+ '</td></tr>'; 
+    }
+    
+    $("#tbodyResult").html(row);
+}
+
+function printerror() {
+   
+    $("#message").html();
+
+}
+</script>
+  </head>
+  <body>
+    
+<form id="form1">
+  <table>
+  <caption>Sign up</caption>
+  <tr><td>User Email: </td><td><input name = "email" /></td></tr>
+  <tr><td>Username:</td><td> <input name = "username" /> </td></tr>
+  <tr><td>User Birthday:</td><td> <input name = "DOB" /> </td></tr>
+  <tr><td colspan="2"><input type = "button" name="Add" id = "Add" value = "Signup"/></td></tr>
+  </table>
+ 
+  <table> 
+  <caption> Search the Database (Enter * to see all records) </caption> 
+  <tr>
+  	<td>Search for:</td> 
+  	<td><input type=text name = "Searchname" /></td>
+  </tr>
+  <tr>
+  	<td>Field:</td>
+  	<td><input type="radio" name="radiobutton" value="user_email" />Email
+          <input type="radio" name="radiobutton" value="uname" />Username 
+          <input type="radio" name="radiobutton" value="user_DofB" />Birthday
+      </td>
+  </tr>  
+  <tr>
+  	<td colspan="2"><input type = "button" id = "Search" name="Search" value = "Search"/></td>
+  </tr>  
+ </table>
+ </form> 
+ 
+ <div id="message"></div>
+
+<table id="result_table">
+<caption>Search Results</caption>
+<thead>
+	<tr>
+		<th>Email</th>
+		<th>Username</th>
+		<th>User Birthday</th>
+	</tr>
+</thead>
+<tbody id="tbodyResult">
+</tbody>
+</table>
+  </body>
+</html>
+

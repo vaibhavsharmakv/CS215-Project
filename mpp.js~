@@ -9,7 +9,7 @@ secretMessageValidation.addEventListener("click",functionset4,false);
 
 var pS = document.getElementById("secretCode");
 
-pS.addEventListener("keyup",suggest,false);
+pS.addEventListener("Keyup",suggest,false);
 
 
 

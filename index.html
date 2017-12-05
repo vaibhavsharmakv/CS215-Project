@@ -1,21 +1,18 @@
-  <html>
+ <html>
 <head>
 <script>
-function showUser(str) {
-    if (str == "") {
+function showHint(str) {
+    if (str.length == 0) {
         document.getElementById("txtHint").innerHTML = "";
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } 
+        var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("txtHint").innerHTML = this.responseText;
             }
         };
-        xmlhttp.open("GET","show_records.php?q="+str,true);
+        xmlhttp.open("GET", "gethint.php?q=" + str, true);
         xmlhttp.send();
     }
 }
@@ -23,11 +20,10 @@ function showUser(str) {
 </head>
 <body>
 
+<p><b>Start typing a name in the input field below:</b></p>
 <form>
-<form>
-First name: <input type="text" onkeyup="showUser(this.value)">
+First name: <input type="text" onkeyup="showHint(this.value)">
 </form>
 <p>Suggestions: <span id="txtHint"></span></p>
-
 </body>
 </html> 
