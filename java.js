@@ -45,7 +45,10 @@ function download(event)
 				if(xhr.responseText!= "null")
 			
 			
-				{	var responseObj = JSON.parse(xhr.responseText);
+				{
+					alert(xhr.responseText);					
+
+					var responseObj = JSON.parse(xhr.responseText);
 					var len = responseObj.length;
 					for(var i =0; i<responseObj.length;i++)
 					{
@@ -74,23 +77,27 @@ function download(event)
 
 
 function suggest(event)
-{	var xhr=new XMLHttpRequest();
+{
+	
+	var xhr=new XMLHttpRequest();
 	xhr.onreadystatechange=function()
-	{		
+	{	
 		if (xhr.readyState==4 && xhr.status==200) 
 		{
-		var responseObj = JSON.parse(xhr.responseText);
 		
+			var responseObj = JSON.parse(xhr.responseText);
 		
-		
-		document.getElementById("usernames").innerHTML = "";
-    		for (var i = 0; i < responseObj.users.length; i++) {
-    			var ptag = document.createElement("p");
-    			ptag.innerHTML = responseObj.users[i].passcode;
-    			ptag.className="user";
-    			ptag.addEventListener("click", clickSuggestion, false);
-    			document.getElementById("usernames").appendChild(ptag);
-			}
+			
+	
+			document.getElementById("usernames").innerHTML = "";
+	    		for (var i = 0; i < responseObj.users.length; i++) {
+	    			var ptag = document.createElement("p");
+			
+	    			ptag.innerHTML = responseObj.users[i];
+	    			ptag.className="user";
+	    			ptag.addEventListener("click", clickSuggestion, false);
+	    			document.getElementById("usernames").appendChild(ptag);
+				}
 		}
 		
 	}

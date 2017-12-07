@@ -1,0 +1,4 @@
+var ref = document.getElementById("refresh");
+
+ref.addEventListener("click",download,false);
+
